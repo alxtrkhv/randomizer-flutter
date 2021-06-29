@@ -18,9 +18,13 @@ class RandomizerView extends StatelessWidget {
           style: theme.textTheme.headline2,
         ),
       )),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () => context.read<RandomizerCubit>().nextInt(),
-        child: const Icon(Icons.radar),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 50),
+        child: FloatingActionButton(
+          onPressed: () => context.read<RandomizerCubit>().nextInt(),
+          child: const Icon(Icons.radar),
+        ),
       ),
     );
   }
