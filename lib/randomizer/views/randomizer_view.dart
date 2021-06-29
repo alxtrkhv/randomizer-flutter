@@ -22,7 +22,7 @@ class RandomizerView extends StatelessWidget {
       floatingActionButton: Padding(
         padding: const EdgeInsets.only(bottom: 50),
         child: FloatingActionButton(
-          onPressed: () => context.read<RandomizerCubit>().nextInt(),
+          onPressed: () => context.read<RandomizerCubit>().nextInt(0, 256),
           child: const Icon(Icons.radar),
         ),
       ),

@@ -8,6 +8,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext buildContext) {
     return BlocProvider(
-        create: (context) => RandomizerCubit(0, 256), child: RandomizerView());
+        create: (context) => RandomizerCubit(0), child: RandomizerView());
   }
 }
