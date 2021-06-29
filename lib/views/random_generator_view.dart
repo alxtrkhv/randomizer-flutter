@@ -1,8 +1,10 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:random_number_generator/random_generator_cubit.dart';
 
-class RandomGeneratorView extends StatefulWidget {
+class RandomGeneratorView extends StatelessWidget {
   final double width;
   final double height;
 
@@ -10,33 +12,20 @@ class RandomGeneratorView extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _RandomGeneratorViewState();
-}
-
-class _RandomGeneratorViewState extends State<RandomGeneratorView> {
-  int _currentValue = 0;
-  int _maxValue = 256;
-
-  @override
   Widget build(BuildContext context) {
     return SizedBox(
-        width: widget.width,
-        height: widget.height,
+        width: width,
+        height: height,
         child: Column(
           mainAxisSize: MainAxisSize.max,
           children: [
-            Text('$_currentValue'),
+            BlocBuilder<RandomGeneratorCubit, int>(
+                builder: (context, state) => Text('$state')),
             TextButton(
-              onPressed: _onButtonClicked,
+              onPressed: context.read<RandomGeneratorCubit>().nextInt,
               child: Text('Click me'),
             )
           ],
         ));
-  }
-
-  void _onButtonClicked() {
-    setState(() {
-      _currentValue = Random().nextInt(_maxValue + 1);
-    });
   }
 }
