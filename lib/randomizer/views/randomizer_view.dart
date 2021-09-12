@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../bloc/randomizer_bloc.dart';
-import '../../ui/input_field_with_label.dart';
 
 class RandomizerView extends StatelessWidget {
   const RandomizerView({Key? key}) : super(key: key);
@@ -60,7 +59,7 @@ class _InputRange extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        InputFieldWithLabel(
+        _InputFieldWithLabel(
           width: fieldWidth,
           height: fieldHeigth,
           label: minLabel,
@@ -68,7 +67,7 @@ class _InputRange extends StatelessWidget {
           onSubmitted: (input) =>
               bloc.add(RandomizerRangeUpdated(min: int.parse(input))),
         ),
-        InputFieldWithLabel(
+        _InputFieldWithLabel(
           width: fieldWidth,
           height: fieldHeigth,
           label: maxLabel,
@@ -77,6 +76,46 @@ class _InputRange extends StatelessWidget {
               bloc.add(RandomizerRangeUpdated(max: int.parse(input))),
         ),
       ],
+    );
+  }
+}
+
+class _InputFieldWithLabel extends StatelessWidget {
+  final String label;
+  final Function(String) onSubmitted;
+  final TextEditingController controller;
+
+  final double width;
+  final double height;
+
+  _InputFieldWithLabel({
+    Key? key,
+    required this.controller,
+    required this.label,
+    required this.onSubmitted,
+    required this.width,
+    required this.height,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    return SizedBox(
+      width: width,
+      height: height,
+      child: Column(
+        children: [
+          Text(
+            '$label',
+            style: theme.textTheme.headline6,
+          ),
+          TextField(
+            textAlign: TextAlign.center,
+            onSubmitted: onSubmitted,
+            controller: controller,
+          )
+        ],
+      ),
     );
   }
 }
